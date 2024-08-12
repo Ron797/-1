@@ -1,0 +1,24 @@
+import sys
+from collections import Counter
+
+def count_words_in_file(file_path, N):
+    with open(file_path, 'r') as file:
+        text = file.read()
+    
+    words = text.split()
+    
+    word_counts = Counter(words)
+    
+    sorted_word_counts = sorted(word_counts.items(), key=lambda x: (-x[1], x[0]))
+    
+    for i, (word, count) in enumerate(sorted_word_counts[:N], 1):
+        print(f"{i} - word \"{word}\" {count} times")
+
+if __name__ == "__main__":
+ 
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <file_path> <N>")
+    else:
+        file_path = sys.argv[1]
+        N = int(sys.argv[2])
+        count_words_in_file(file_path, N)
